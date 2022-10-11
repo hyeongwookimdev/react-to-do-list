@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/react-to-do-list/static/js/main.0848c6d2.js",
+    "static/media/bg.png": "/react-to-do-list/static/media/bg.d9f2b2894f80f1aafe22.png",
+    "index.html": "/react-to-do-list/index.html",
+    "main.0848c6d2.js.map": "/react-to-do-list/static/js/main.0848c6d2.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.0848c6d2.js"
+  ]
+}
