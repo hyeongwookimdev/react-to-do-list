@@ -37,7 +37,7 @@ footer, header, hgroup, main, menu, nav, section {
 body {
   line-height: 1;
 }
-menu, ol, ul {
+menu, ol, ul, li {
   list-style: none;
 }
 blockquote, q {
@@ -62,6 +62,10 @@ body {
   background-color: ${(props) => props.theme.bgColor};
   color:${(props) => props.theme.textColor};
   line-height: 1.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 a {

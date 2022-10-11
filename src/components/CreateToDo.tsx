@@ -23,6 +23,7 @@ function CreateToDo() {
       <input
         {...register("toDo", { required: "Please write a To Do" })}
         placeholder="Write a to do"
+        maxLength={15}
       />
       <button>Add</button>
     </form>

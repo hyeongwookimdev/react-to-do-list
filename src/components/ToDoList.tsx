@@ -1,44 +1,104 @@
 import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  categoryState,
-  Categories,
-  toDoSelector,
-  userCategoryState,
-} from "./atoms";
+import { useRecoilValue } from "recoil";
+import styled from "styled-components";
+import { toDoSelector } from "./atoms";
+import Category from "./Category";
 import CreateCategory from "./CreateCategory";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
+import img from "../bg.png";
+
+const Container = styled.div`
+  background-image: url(${img});
+  width: 375px;
+  height: 667px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 40px;
+  border: 11px solid black;
+  position: relative;
+`;
+
+const Header = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+  margin-bottom: 12px;
+
+  h1 {
+    text-align: center;
+    width: 55%;
+    background-color: #000;
+    padding: 10px 0px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  div {
+    width: 22.5%;
+    text-align: center;
+  }
+`;
+
+const AppList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 75px);
+  grid-template-rows: 75px;
+  grid-auto-rows: 75px;
+  gap: 10px;
+`;
+
+const CreateInputs = styled.div`
+  width: 94%;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 15px;
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  button {
+    border: none;
+    border-radius: 5px;
+    height: 25px;
+  }
+  input {
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    height: 25px;
+    width: 270px;
+  }
+`;
 
 function ToDoList() {
   const toDos = useRecoilValue(toDoSelector);
-  const userCategories = useRecoilValue(userCategoryState);
-  const [category, setCategory] = useRecoilState(categoryState);
-  console.log(toDos);
-  const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
-    setCategory(event.currentTarget.value as any);
-  };
-
   return (
-    <div>
-      <h1>To Do List</h1>
-      <hr />
-      <CreateCategory />
-      <select value={category} onInput={onInput}>
-        <option value={Categories.TO_DO}>To Do</option>
-        <option value={Categories.DOING}>Doing</option>
-        <option value={Categories.DONE}>Done</option>
-        {userCategories?.map((userCategory) => (
-          <option value={userCategory.text} key={userCategory.id}>
-            {userCategory.text}
-          </option>
+    <Container>
+      <Header>
+        <div>
+          <Category />
+        </div>
+
+        <h1>To Do List</h1>
+        <div>12:34</div>
+      </Header>
+      <AppList>
+        {toDos?.map((toDo) => (
+          <ToDo key={toDo.id} {...toDo} />
         ))}
-      </select>
-      <CreateToDo />
-      {toDos?.map((toDo) => (
-        <ToDo key={toDo.id} {...toDo} />
-      ))}
-    </div>
+      </AppList>
+      <CreateInputs>
+        <CreateToDo />
+        <CreateCategory />
+      </CreateInputs>
+    </Container>
   );
 }
 
